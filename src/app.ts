@@ -6,7 +6,7 @@ import errorMiddleware from "./middlewares/erreur.middleware";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { swaggerUi, swaggerDocs } from "./swagger";
-
+const CSS_URL = "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css"
 class App {
   public app: express.Application;
   public port: number;
@@ -24,7 +24,7 @@ class App {
   private initializeMiddlewares() {
     this.app.use(bodyParser.json());
     this.app.use(cookieParser());
-    this.app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+    this.app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocs, { customCssUrl: CSS_URL }));
     this.app.use(
       cors({
         origin: "http://localhost:5173",
